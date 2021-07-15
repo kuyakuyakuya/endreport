@@ -5,7 +5,6 @@
 int cnt = 0;
 int cnt2 = 0;
 int cnt3 = 0;
-int i = 0;
 
 int main(int argc, char* argv[])
 {
@@ -55,6 +54,31 @@ int main(int argc, char* argv[])
 			}
 			break;
 
+		case 1:	//レベル遷移
+			wclear(win);
+			box(win, '|', '-');
+			box(sub, '|', '-');
+			switch (key) {
+			case 0x31:	//1
+
+			case 0x32:	//2
+
+			case 0x33:	//3
+
+			}
+
+			wrefresh(win);
+			break;
+
+		case 2:	//LEVEL1
+
+
+		case 3:	//LEVEL2
+
+
+		case 4:	//LEVEL3
+
+		}
 	}
 
 	/* 後処理 */
