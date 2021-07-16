@@ -73,27 +73,27 @@ int main(int argc, char* argv[])
 	/* ウィンドウ作成 */
 	win = newwin(LINES, COLS, 0, 0);
 	WINDOW* subwin(WINDOW * win, int line, int cols, int begin_y, int begin_x);
-	sub = subwin(win, LINES - 2, COLS - 47, 0, 15);
+	sub = subwin(win, LINES - 2, COLS - 40, 1, 2);
 
 	//初期画面の描画
-	mvwaddstr(win, LINES / 2, COLS / 2 - 10, "Press the Key '0'");
+	mvwaddstr(win, LINES / 2, COLS / 2 - 10, "Press the Key 'q'");
 	wrefresh(win);
-	napms(2000);	//数秒間初期画面を描画するためのディレイ
+	napms(1500);	//数秒間初期画面を描画するためのディレイ
 
 	while (1) {
 		key = getch();
-		if (key == 'q') break;
+		if (key == 0x39) break;
 		switch (cnt) {
 		case 0:	//レベル選択画面
 			wrefresh(win);
-			if (key == 0x30) {
+			if (key == 'q') {
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvwaddstr(win, 10, 25, "TYPING GAME");
-				mvwaddstr(win, 14, 25, "LEVEL1:Press the KEY 1");
-				mvwaddstr(win, 16, 25, "LEVEL2:Press the KEY 2");
-				mvwaddstr(win, 18, 25, "LEVEL3:Press the KEY 3");
+				mvwaddstr(win, 10, 35, "TYPING GAME");
+				mvwaddstr(win, 14, 28, "LEVEL1 : Press the KEY '1'");
+				mvwaddstr(win, 16, 28, "LEVEL2 : Press the KEY '2'");
+				mvwaddstr(win, 18, 28, "LEVEL3 : Press the KEY '3'");
 
 				wrefresh(win);
 				cnt++;
@@ -110,8 +110,8 @@ int main(int argc, char* argv[])
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvprintw(10, 25, "%s", Level1.Q1);
-				mvprintw(18, 33, "ミスした回数：%d", missCnt);
+				mvprintw(12, 38, "%s", Level1.Q1);
+				mvprintw(23, 33, "ミスした回数：%d", missCnt);
 				cnt++;
 				break;
 
@@ -119,8 +119,8 @@ int main(int argc, char* argv[])
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvprintw(10, 25, "%s", Level2.Q1);
-				mvprintw(18, 33, "ミスした回数：%d", missCnt);
+				mvprintw(12, 33, "%s", Level2.Q1);
+				mvprintw(23, 33, "ミスした回数：%d", missCnt);
 				cnt += 2;
 				break;
 
@@ -128,8 +128,8 @@ int main(int argc, char* argv[])
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvprintw(10, 25, "%s", Level3.Q1);
-				mvprintw(18, 33, "ミスした回数：%d", missCnt);
+				mvprintw(12, 25, "%s", Level3.Q1);
+				mvprintw(23, 33, "ミスした回数：%d", missCnt);
 				cnt += 3;
 				break;
 			}
@@ -141,7 +141,7 @@ int main(int argc, char* argv[])
 			switch (cnt2) {
 			case 0:
 				if (key == 'D') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 38, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
 
 			case 1:
 				if (key == 'o') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 40, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -161,8 +161,8 @@ int main(int argc, char* argv[])
 
 			case 2:
 				if (key == 'g') {
-					mvprintw(10, 29, "%s", " ");
-					mvprintw(10, 25, "%s", Level1.Q2);
+					mvprintw(12, 42, "%s", " ");
+					mvprintw(12, 36, "%s", Level1.Q2);
 					cnt2++;
 				}
 				else {
@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
 
 			case 3:
 				if (key == 'A') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 36, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -182,7 +182,7 @@ int main(int argc, char* argv[])
 
 			case 4:
 				if (key == 'p') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 38, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -192,7 +192,7 @@ int main(int argc, char* argv[])
 
 			case 5:
 				if (key == 'p') {
-					mvprintw(10, 29, "%s", " ");
+					mvprintw(12, 40, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -202,7 +202,7 @@ int main(int argc, char* argv[])
 
 			case 6:
 				if (key == 'l') {
-					mvprintw(10, 31, "%s", " ");
+					mvprintw(12, 42, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -212,8 +212,8 @@ int main(int argc, char* argv[])
 
 			case 7:
 				if (key == 'e') {
-					mvprintw(10, 33, "%s", " ");
-					mvprintw(10, 25, "%s", Level1.Q3);
+					mvprintw(12, 44, "%s", " ");
+					mvprintw(12, 36, "%s", Level1.Q3);
 					cnt2++;
 				}
 				else {
@@ -223,7 +223,7 @@ int main(int argc, char* argv[])
 
 			case 8:
 				if (key == 'W') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 36, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -233,7 +233,7 @@ int main(int argc, char* argv[])
 
 			case 9:
 				if (key == 'a') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 38, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -243,7 +243,7 @@ int main(int argc, char* argv[])
 
 			case 10:
 				if (key == 't') {
-					mvprintw(10, 29, "%s", " ");
+					mvprintw(12, 40, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -253,7 +253,7 @@ int main(int argc, char* argv[])
 
 			case 11:
 				if (key == 'e') {
-					mvprintw(10, 31, "%s", " ");
+					mvprintw(12, 42, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -263,9 +263,9 @@ int main(int argc, char* argv[])
 
 			case 12:
 				if (key == 'r') {
-					mvprintw(10, 33, "%s", " ");
-					mvwaddstr(win, 10, 25, "G A M E  C L E A R ! !");
-					mvwaddstr(win, 13, 25, "ゲーム終了：Press 'q'");
+					mvprintw(12, 44, "%s", " ");
+					mvwaddstr(win, 12, 30, "G A M E  C L E A R ! !");
+					mvwaddstr(win, 19, 31, "ゲーム終了：Press '9'");
 					//ファイルオープン//
 					error = fopen_s(&fp, "result.txt", "w");
 					if (error != 0) {
@@ -278,7 +278,7 @@ int main(int argc, char* argv[])
 				}
 				break;
 			}
-			mvprintw(18, 33, "ミスした回数：%d", missCnt);
+			mvprintw(23, 33, "ミスした回数：%d", missCnt);
 			wrefresh(win);
 			break;
 
@@ -286,7 +286,7 @@ int main(int argc, char* argv[])
 			switch (cnt2) {
 			case 0:
 				if (key == 'C') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 33, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -296,7 +296,7 @@ int main(int argc, char* argv[])
 
 			case 1:
 				if (key == 'o') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 35, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -306,7 +306,7 @@ int main(int argc, char* argv[])
 
 			case 2:
 				if (key == 'm') {
-					mvprintw(10, 29, "%s", " ");
+					mvprintw(12, 37, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -316,7 +316,7 @@ int main(int argc, char* argv[])
 
 			case 3:
 				if (key == 'p') {
-					mvprintw(10, 31, "%s", " ");
+					mvprintw(12, 39, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -326,7 +326,7 @@ int main(int argc, char* argv[])
 
 			case 4:
 				if (key == 'u') {
-					mvprintw(10, 33, "%s", " ");
+					mvprintw(12, 41, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -336,7 +336,7 @@ int main(int argc, char* argv[])
 
 			case 5:
 				if (key == 't') {
-					mvprintw(10, 35, "%s", " ");
+					mvprintw(12, 43, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -346,7 +346,7 @@ int main(int argc, char* argv[])
 
 			case 6:
 				if (key == 'e') {
-					mvprintw(10, 37, "%s", " ");
+					mvprintw(12, 45, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -356,8 +356,8 @@ int main(int argc, char* argv[])
 
 			case 7:
 				if (key == 'r') {
-					mvprintw(10, 39, "%s", " ");
-					mvprintw(10, 25, "%s", Level2.Q2);
+					mvprintw(12, 47, "%s", " ");
+					mvprintw(12, 32, "%s", Level2.Q2);
 					cnt2++;
 				}
 				else {
@@ -367,7 +367,7 @@ int main(int argc, char* argv[])
 
 			case 8:
 				if (key == 'W') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 32, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -377,7 +377,7 @@ int main(int argc, char* argv[])
 
 			case 9:
 				if (key == 'e') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 34, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -387,7 +387,7 @@ int main(int argc, char* argv[])
 
 			case 10:
 				if (key == 'd') {
-					mvprintw(10, 29, "%s", " ");
+					mvprintw(12, 36, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -397,7 +397,7 @@ int main(int argc, char* argv[])
 
 			case 11:
 				if (key == 'n') {
-					mvprintw(10, 31, "%s", " ");
+					mvprintw(12, 38, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -407,7 +407,7 @@ int main(int argc, char* argv[])
 
 			case 12:
 				if (key == 'e') {
-					mvprintw(10, 33, "%s", " ");
+					mvprintw(12, 40, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -417,7 +417,7 @@ int main(int argc, char* argv[])
 
 			case 13:
 				if (key == 's') {
-					mvprintw(10, 35, "%s", " ");
+					mvprintw(12, 42, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -427,7 +427,7 @@ int main(int argc, char* argv[])
 
 			case 14:
 				if (key == 'd') {
-					mvprintw(10, 37, "%s", " ");
+					mvprintw(12, 44, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -437,7 +437,7 @@ int main(int argc, char* argv[])
 
 			case 15:
 				if (key == 'a') {
-					mvprintw(10, 39, "%s", " ");
+					mvprintw(12, 46, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -447,8 +447,8 @@ int main(int argc, char* argv[])
 
 			case 16:
 				if (key == 'y') {
-					mvprintw(10, 41, "%s", " ");
-					mvprintw(10, 25, "%s", Level2.Q3);
+					mvprintw(12, 48, "%s", " ");
+					mvprintw(12, 32, "%s", Level2.Q3);
 					cnt2++;
 				}
 				else {
@@ -457,7 +457,7 @@ int main(int argc, char* argv[])
 				break;
 			case 17:
 				if (key == 'U') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 32, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -467,7 +467,7 @@ int main(int argc, char* argv[])
 
 			case 18:
 				if (key == 'n') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 34, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -477,7 +477,7 @@ int main(int argc, char* argv[])
 
 			case 19:
 				if (key == 'd') {
-					mvprintw(10, 29, "%s", " ");
+					mvprintw(12, 36, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -487,7 +487,7 @@ int main(int argc, char* argv[])
 
 			case 20:
 				if (key == 'e') {
-					mvprintw(10, 31, "%s", " ");
+					mvprintw(12, 38, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -497,7 +497,7 @@ int main(int argc, char* argv[])
 
 			case 21:
 				if (key == 'r') {
-					mvprintw(10, 33, "%s", " ");
+					mvprintw(12, 40, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -506,7 +506,7 @@ int main(int argc, char* argv[])
 
 			case 22:
 				if (key == 's') {
-					mvprintw(10, 35, "%s", " ");
+					mvprintw(12, 42, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -516,7 +516,7 @@ int main(int argc, char* argv[])
 
 			case 23:
 				if (key == 't') {
-					mvprintw(10, 37, "%s", " ");
+					mvprintw(12, 44, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -526,7 +526,7 @@ int main(int argc, char* argv[])
 
 			case 24:
 				if (key == 'a') {
-					mvprintw(10, 39, "%s", " ");
+					mvprintw(12, 46, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -536,7 +536,7 @@ int main(int argc, char* argv[])
 
 			case 25:
 				if (key == 'n') {
-					mvprintw(10, 41, "%s", " ");
+					mvprintw(12, 48, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -546,9 +546,9 @@ int main(int argc, char* argv[])
 
 			case 26:
 				if (key == 'd') {
-					mvprintw(10, 43, "%s", " ");
-					mvwaddstr(win, 10, 25, "G A M E  C L E A R ! !");
-					mvwaddstr(win, 13, 25, "ゲーム終了：Press 'q'");
+					mvprintw(12, 50, "%s", " ");
+					mvwaddstr(win, 12, 30, "G A M E  C L E A R ! !");
+					mvwaddstr(win, 19, 31, "ゲーム終了：Press '9'");
 					//ファイルオープン//
 					error = fopen_s(&fp, "result.txt", "w");
 					if (error != 0) {
@@ -561,7 +561,7 @@ int main(int argc, char* argv[])
 				}
 				break;
 			}
-			mvprintw(18, 33, "ミスした回数：%d", missCnt);
+			mvprintw(23, 33, "ミスした回数：%d", missCnt);
 			wrefresh(win);
 			break;
 
@@ -569,7 +569,7 @@ int main(int argc, char* argv[])
 			switch (cnt2) {
 			case 0:
 				if (key == 'I') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 25, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -579,7 +579,7 @@ int main(int argc, char* argv[])
 
 			case 1:
 				if (key == 'p') {
-					mvprintw(10, 28, "%s", " ");
+					mvprintw(12, 28, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -589,7 +589,7 @@ int main(int argc, char* argv[])
 
 			case 2:
 				if (key == 'l') {
-					mvprintw(10, 30, "%s", " ");
+					mvprintw(12, 30, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -599,7 +599,7 @@ int main(int argc, char* argv[])
 
 			case 3:
 				if (key == 'a') {
-					mvprintw(10, 32, "%s", " ");
+					mvprintw(12, 32, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -609,7 +609,7 @@ int main(int argc, char* argv[])
 
 			case 4:
 				if (key == 'y') {
-					mvprintw(10, 34, "%s", " ");
+					mvprintw(12, 34, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -620,7 +620,7 @@ int main(int argc, char* argv[])
 
 			case 5:
 				if (key == 't') {
-					mvprintw(10, 37, "%s", " ");
+					mvprintw(12, 37, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -630,7 +630,7 @@ int main(int argc, char* argv[])
 
 			case 6:
 				if (key == 'h') {
-					mvprintw(10, 39, "%s", " ");
+					mvprintw(12, 39, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -640,7 +640,7 @@ int main(int argc, char* argv[])
 
 			case 7:
 				if (key == 'e') {
-					mvprintw(10, 41, "%s", " ");
+					mvprintw(12, 41, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -650,7 +650,7 @@ int main(int argc, char* argv[])
 
 			case 8:
 				if (key == 'g') {
-					mvprintw(10, 44, "%s", " ");
+					mvprintw(12, 44, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -660,7 +660,7 @@ int main(int argc, char* argv[])
 
 			case 9:
 				if (key == 'u') {
-					mvprintw(10, 46, "%s", " ");
+					mvprintw(12, 46, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -670,7 +670,7 @@ int main(int argc, char* argv[])
 
 			case 10:
 				if (key == 'i') {
-					mvprintw(10, 48, "%s", " ");
+					mvprintw(12, 48, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -680,7 +680,7 @@ int main(int argc, char* argv[])
 
 			case 11:
 				if (key == 't') {
-					mvprintw(10, 50, "%s", " ");
+					mvprintw(12, 50, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -690,15 +690,15 @@ int main(int argc, char* argv[])
 
 			case 12:
 				if (key == 'a') {
-					mvprintw(10, 52, "%s", " ");
+					mvprintw(12, 52, "%s", " ");
 					cnt2++;
 				}
 				break;
 
 			case 13:
 				if (key == 'r') {
-					mvprintw(10, 54, "%s", " ");
-					mvprintw(10, 25, "%s", Level3.Q2);
+					mvprintw(12, 54, "%s", " ");
+					mvprintw(12, 24, "%s", Level3.Q2);
 					cnt2++;
 				}
 				else {
@@ -708,7 +708,7 @@ int main(int argc, char* argv[])
 
 			case 14:
 				if (key == 'H') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 24, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -718,7 +718,7 @@ int main(int argc, char* argv[])
 
 			case 15:
 				if (key == 'e') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 26, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -728,7 +728,7 @@ int main(int argc, char* argv[])
 
 			case 16:
 				if (key == 'm') {
-					mvprintw(10, 30, "%s", " ");
+					mvprintw(12, 29, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -737,7 +737,7 @@ int main(int argc, char* argv[])
 				break;
 			case 17:
 				if (key == 'a') {
-					mvprintw(10, 32, "%s", " ");
+					mvprintw(12, 31, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -747,7 +747,7 @@ int main(int argc, char* argv[])
 
 			case 18:
 				if (key == 'k') {
-					mvprintw(10, 34, "%s", " ");
+					mvprintw(12, 33, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -757,7 +757,7 @@ int main(int argc, char* argv[])
 
 			case 19:
 				if (key == 'e') {
-					mvprintw(10, 36, "%s", " ");
+					mvprintw(12, 35, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -767,7 +767,7 @@ int main(int argc, char* argv[])
 
 			case 20:
 				if (key == 's') {
-					mvprintw(10, 38, "%s", " ");
+					mvprintw(12, 37, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -777,7 +777,7 @@ int main(int argc, char* argv[])
 
 			case 21:
 				if (key == 'b') {
-					mvprintw(10, 41, "%s", " ");
+					mvprintw(12, 40, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -787,7 +787,7 @@ int main(int argc, char* argv[])
 
 			case 22:
 				if (key == 'r') {
-					mvprintw(10, 43, "%s", " ");
+					mvprintw(12, 42, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -797,7 +797,7 @@ int main(int argc, char* argv[])
 
 			case 23:
 				if (key == 'e') {
-					mvprintw(10, 45, "%s", " ");
+					mvprintw(12, 44, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -807,7 +807,7 @@ int main(int argc, char* argv[])
 
 			case 24:
 				if (key == 'a') {
-					mvprintw(10, 47, "%s", " ");
+					mvprintw(12, 46, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -817,7 +817,7 @@ int main(int argc, char* argv[])
 
 			case 25:
 				if (key == 'k') {
-					mvprintw(10, 49, "%s", " ");
+					mvprintw(12, 48, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -827,7 +827,7 @@ int main(int argc, char* argv[])
 
 			case 26:
 				if (key == 'f') {
-					mvprintw(10, 51, "%s", " ");
+					mvprintw(12, 50, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -837,7 +837,7 @@ int main(int argc, char* argv[])
 
 			case 27:
 				if (key == 'a') {
-					mvprintw(10, 53, "%s", " ");
+					mvprintw(12, 52, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -847,7 +847,7 @@ int main(int argc, char* argv[])
 
 			case 28:
 				if (key == 's') {
-					mvprintw(10, 55, "%s", " ");
+					mvprintw(12, 54, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -857,8 +857,8 @@ int main(int argc, char* argv[])
 
 			case 29:
 				if (key == 't') {
-					mvprintw(10, 57, "%s", " ");
-					mvprintw(10, 25, "%s", Level3.Q3);
+					mvprintw(12, 56, "%s", " ");
+					mvprintw(12, 22, "%s", Level3.Q3);
 					cnt2++;
 				}
 				else {
@@ -868,7 +868,7 @@ int main(int argc, char* argv[])
 
 			case 30:
 				if (key == 'S') {
-					mvprintw(10, 25, "%s", " ");
+					mvprintw(12, 22, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -878,7 +878,7 @@ int main(int argc, char* argv[])
 
 			case 31:
 				if (key == 'h') {
-					mvprintw(10, 27, "%s", " ");
+					mvprintw(12, 24, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -888,7 +888,7 @@ int main(int argc, char* argv[])
 
 			case 32:
 				if (key == 'e') {
-					mvprintw(10, 29, "%s", " ");
+					mvprintw(12, 26, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -898,7 +898,7 @@ int main(int argc, char* argv[])
 
 			case 33:
 				if (key == 'h') {
-					mvprintw(10, 32, "%s", " ");
+					mvprintw(12, 29, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -908,7 +908,7 @@ int main(int argc, char* argv[])
 
 			case 34:
 				if (key == 'a') {
-					mvprintw(10, 34, "%s", " ");
+					mvprintw(12, 31, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -918,7 +918,7 @@ int main(int argc, char* argv[])
 
 			case 35:
 				if (key == 's') {
-					mvprintw(10, 36, "%s", " ");
+					mvprintw(12, 33, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -928,7 +928,7 @@ int main(int argc, char* argv[])
 
 			case 36:
 				if (key == 't') {
-					mvprintw(10, 39, "%s", " ");
+					mvprintw(12, 36, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -938,7 +938,7 @@ int main(int argc, char* argv[])
 
 			case 37:
 				if (key == 'o') {
-					mvprintw(10, 41, "%s", " ");
+					mvprintw(12, 38, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -948,7 +948,7 @@ int main(int argc, char* argv[])
 
 			case 38:
 				if (key == 'd') {
-					mvprintw(10, 44, "%s", " ");
+					mvprintw(12, 41, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -958,7 +958,7 @@ int main(int argc, char* argv[])
 
 			case 39:
 				if (key == 'o') {
-					mvprintw(10, 46, "%s", " ");
+					mvprintw(12, 43, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -968,7 +968,7 @@ int main(int argc, char* argv[])
 
 			case 40:
 				if (key == 'h') {
-					mvprintw(10, 49, "%s", " ");
+					mvprintw(12, 46, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -978,7 +978,7 @@ int main(int argc, char* argv[])
 
 			case 41:
 				if (key == 'o') {
-					mvprintw(10, 51, "%s", " ");
+					mvprintw(12, 48, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -988,7 +988,7 @@ int main(int argc, char* argv[])
 
 			case 42:
 				if (key == 'm') {
-					mvprintw(10, 53, "%s", " ");
+					mvprintw(12, 50, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -998,7 +998,7 @@ int main(int argc, char* argv[])
 
 			case 43:
 				if (key == 'e') {
-					mvprintw(10, 55, "%s", " ");
+					mvprintw(12, 52, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -1008,7 +1008,7 @@ int main(int argc, char* argv[])
 
 			case 44:
 				if (key == 'w') {
-					mvprintw(10, 57, "%s", " ");
+					mvprintw(12, 54, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -1018,7 +1018,7 @@ int main(int argc, char* argv[])
 
 			case 45:
 				if (key == 'o') {
-					mvprintw(10, 59, "%s", " ");
+					mvprintw(12, 56, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -1028,7 +1028,7 @@ int main(int argc, char* argv[])
 
 			case 46:
 				if (key == 'r') {
-					mvprintw(10, 61, "%s", " ");
+					mvprintw(12, 58, "%s", " ");
 					cnt2++;
 				}
 				else {
@@ -1038,9 +1038,9 @@ int main(int argc, char* argv[])
 
 			case 47:
 				if (key == 'k') {
-					mvprintw(10, 63, "%s", " ");
-					mvwaddstr(win, 10, 25, "G A M E  C L E A R ! !");
-					mvwaddstr(win, 13, 25, "ゲーム終了：Press 'q'");
+					mvprintw(12, 60, "%s", " ");
+					mvwaddstr(win, 12, 30, "G A M E  C L E A R ! !");
+					mvwaddstr(win, 19, 31, "ゲーム終了：Press '9'");
 					//ファイルオープン//
 					error = fopen_s(&fp, "result.txt", "w");
 					if (error != 0) {
@@ -1054,7 +1054,7 @@ int main(int argc, char* argv[])
 				break;
 
 			}
-			mvprintw(18, 33, "ミスした回数：%d", missCnt);
+			mvprintw(23, 33, "ミスした回数：%d", missCnt);
 			wrefresh(win);
 			break;
 
