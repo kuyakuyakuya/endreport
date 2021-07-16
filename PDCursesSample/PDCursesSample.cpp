@@ -1,6 +1,14 @@
 ﻿#include <stdio.h>
 #include <curses.h>
 #include <Windows.h>
+#define CHARBUFF 124
+#define BUFFSIZE 1024
+
+
+void getCurrentDirectory(char* currentDirectory) {
+	GetCurrentDirectory(CHARBUFF, currentDirectory);
+}
+
 
 int cnt = 0;
 int cnt2 = 0;
@@ -8,6 +16,57 @@ int cnt3 = 0;
 
 int main(int argc, char* argv[])
 {
+
+	struct Question {
+		char Q1[CHARBUFF];
+		char Q2[CHARBUFF];
+		char Q3[CHARBUFF];
+
+	};
+
+	Question Level1;
+	Question Level2;
+	Question Level3;
+
+	//iniファイルを使用するための初期設定
+	char currentDirectory[CHARBUFF];
+	getCurrentDirectory(currentDirectory);
+	char section[CHARBUFF];
+	sprintf_s(section, "section1");
+	char keyWord[CHARBUFF];
+	sprintf_s(keyWord, "keyword1");
+	char settingFile[CHARBUFF];
+	sprintf_s(settingFile, "%s\\setting.ini", currentDirectory);
+	char keyValue[CHARBUFF];
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level1.Q1, keyValue);
+	sprintf_s(keyWord, "keyword2");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level1.Q2, keyValue);
+	sprintf_s(keyWord, "keyword3");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level1.Q3, keyValue);
+	sprintf_s(section, "section2");
+	sprintf_s(keyWord, "keyword1");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level2.Q1, keyValue);
+	sprintf_s(keyWord, "keyword2");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level2.Q2, keyValue);
+	sprintf_s(keyWord, "keyword3");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level2.Q3, keyValue);
+	sprintf_s(section, "section3");
+	sprintf_s(keyWord, "keyword1");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level3.Q1, keyValue);
+	sprintf_s(keyWord, "keyword2");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level3.Q2, keyValue);
+	sprintf_s(keyWord, "keyword3");
+	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
+	sprintf_s(Level3.Q3, keyValue);
+
 	if (initscr() == NULL) {
 		return 1;
 	}
@@ -63,7 +122,7 @@ int main(int argc, char* argv[])
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvwaddstr(win, 10, 25, "D o g");
+				mvprintw(10, 25, "%s", Level1.Q1);
 				cnt++;
 				break;
 
@@ -71,7 +130,7 @@ int main(int argc, char* argv[])
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvwaddstr(win, 10, 25, "C o m p u t e r");
+				mvprintw(10, 25, "%s", Level2.Q1);
 				cnt += 2;
 				break;
 
@@ -79,7 +138,7 @@ int main(int argc, char* argv[])
 				wclear(win);
 				box(win, '|', '-');
 				box(sub, '|', '-');
-				mvwaddstr(win, 10, 25, "I  p l a y  t h e  g u i t a r");
+				mvprintw(10, 25, "%s", Level3.Q1);
 				cnt += 3;
 				break;
 			}
@@ -93,95 +152,96 @@ int main(int argc, char* argv[])
 				switch (cnt3) {
 				case 0:
 					if (key == 'D') {
-						mvwaddstr(win, 10, 25, " ");
+						mvprintw(10, 25, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 1:
 					if (key == 'o') {
-						mvwaddstr(win, 10, 27, " ");
+						mvprintw(10, 27, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 2:
 					if (key == 'g') {
-						mvwaddstr(win, 10, 29, " ");
-						mvwaddstr(win, 10, 25, "A p p l e");
+						mvprintw(10, 29, "%s", " ");
+						mvprintw(10, 25, "%s", Level1.Q2);
 						cnt3++;
 					}
 					break;
 
 				case 3:
 					if (key == 'A') {
-						mvwaddstr(win, 10, 25, " ");
+						mvprintw(10, 25, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 4:
 					if (key == 'p') {
-						mvwaddstr(win, 10, 27, " ");
+						mvprintw(10, 27, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 5:
 					if (key == 'p') {
-						mvwaddstr(win, 10, 29, " ");
+						mvprintw(10, 29, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 6:
 					if (key == 'l') {
-						mvwaddstr(win, 10, 31, " ");
+						mvprintw(10, 31, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 7:
 					if (key == 'e') {
-						mvwaddstr(win, 10, 33, " ");
-						mvwaddstr(win, 10, 25, "W a t e r");
+						mvprintw(10, 33, "%s", " ");
+						mvprintw(10, 25, "%s", Level1.Q3);
 						cnt3++;
 					}
 					break;
 
 				case 8:
 					if (key == 'W') {
-						mvwaddstr(win, 10, 25, " ");
+						mvprintw(10, 25, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 9:
 					if (key == 'a') {
-						mvwaddstr(win, 10, 27, " ");
+						mvprintw(10, 27, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 10:
 					if (key == 't') {
-						mvwaddstr(win, 10, 29, " ");
+						mvprintw(10, 29, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 11:
 					if (key == 'e') {
-						mvwaddstr(win, 10, 31, " ");
+						mvprintw(10, 31, "%s", " ");
 						cnt3++;
 					}
 					break;
 
 				case 12:
 					if (key == 'r') {
-						mvwaddstr(win, 10, 33, " ");
+						mvprintw(10, 33, "%s", " ");
 						mvwaddstr(win, 10, 25, "G A M E  C L E A R ! !");
 						cnt3 == 0;
+						cnt == 0;
 					}
 					break;
 				}
@@ -195,189 +255,189 @@ int main(int argc, char* argv[])
 			switch (cnt3) {
 			case 0:
 				if (key == 'C') {
-					mvwaddstr(win, 10, 25, " ");
+					mvprintw(10, 25, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 1:
 				if (key == 'o') {
-					mvwaddstr(win, 10, 27, " ");
+					mvprintw(10, 27, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 2:
 				if (key == 'm') {
-					mvwaddstr(win, 10, 29, " ");
+					mvprintw(10, 29, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 3:
 				if (key == 'p') {
-					mvwaddstr(win, 10, 31, " ");
+					mvprintw(10, 31, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 4:
 				if (key == 'u') {
-					mvwaddstr(win, 10, 33, " ");
+					mvprintw(10, 33, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 5:
 				if (key == 't') {
-					mvwaddstr(win, 10, 35, " ");
+					mvprintw(10, 35, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 6:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 37, " ");
+					mvprintw(10, 37, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 7:
 				if (key == 'r') {
-					mvwaddstr(win, 10, 39, " ");
-					mvwaddstr(win, 10, 25, "W e d n e s d a y");
+					mvprintw(10, 39, "%s", " ");
+					mvprintw(10, 25, "%s", Level2.Q2);
 					cnt3++;
 				}
 				break;
 
 			case 8:
 				if (key == 'W') {
-					mvwaddstr(win, 10, 25, " ");
+					mvprintw(10, 25, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 9:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 27, " ");
+					mvprintw(10, 27, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 10:
 				if (key == 'd') {
-					mvwaddstr(win, 10, 29, " ");
+					mvprintw(10, 29, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 11:
 				if (key == 'n') {
-					mvwaddstr(win, 10, 31, " ");
+					mvprintw(10, 31, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 12:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 33, " ");
+					mvprintw(10, 33, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 13:
 				if (key == 's') {
-					mvwaddstr(win, 10, 35, " ");
+					mvprintw(10, 35, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 14:
 				if (key == 'd') {
-					mvwaddstr(win, 10, 37, " ");
+					mvprintw(10, 37, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 15:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 39, " ");
+					mvprintw(10, 39, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 16:
 				if (key == 'y') {
-					mvwaddstr(win, 10, 41, " ");
-					mvwaddstr(win, 10, 25, "U n d e r s t a n d");
+					mvprintw(10, 41, "%s", " ");
+					mvprintw(10, 25, "%s", Level2.Q3);
 					cnt3++;
 				}
 				break;
 			case 17:
 				if (key == 'U') {
-					mvwaddstr(win, 10, 25, " ");
+					mvprintw(10, 25, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 18:
 				if (key == 'n') {
-					mvwaddstr(win, 10, 27, " ");
+					mvprintw(10, 27, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 19:
 				if (key == 'd') {
-					mvwaddstr(win, 10, 29, " ");
+					mvprintw(10, 29, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 20:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 31, " ");
+					mvprintw(10, 31, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 21:
 				if (key == 'r') {
-					mvwaddstr(win, 10, 33, " ");
+					mvprintw(10, 33, "%s", " ");
 					cnt3++;
 				}
 
 			case 22:
 				if (key == 's') {
-					mvwaddstr(win, 10, 35, " ");
+					mvprintw(10, 35, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 23:
 				if (key == 't') {
-					mvwaddstr(win, 10, 37, " ");
+					mvprintw(10, 37, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 24:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 39, " ");
+					mvprintw(10, 39, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 25:
 				if (key == 'n') {
-					mvwaddstr(win, 10, 41, " ");
+					mvprintw(10, 41, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 26:
 				if (key == 'd') {
-					mvwaddstr(win, 10, 43, " ");
+					mvprintw(10, 43, "%s", " ");
 					mvwaddstr(win, 10, 25, "G A M E  C L E A R ! !");
 					cnt3++;
 				}
@@ -390,35 +450,35 @@ int main(int argc, char* argv[])
 			switch (cnt3) {
 			case 0:
 				if (key == 'I') {
-					mvwaddstr(win, 10, 25, " ");
+					mvprintw(10, 25, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 1:
 				if (key == 'p') {
-					mvwaddstr(win, 10, 28, " ");
+					mvprintw(10, 28, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 2:
 				if (key == 'l') {
-					mvwaddstr(win, 10, 30, " ");
+					mvprintw(10, 30, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 3:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 32, " ");
+					mvprintw(10, 32, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 4:
 				if (key == 'y') {
-					mvwaddstr(win, 10, 34, " ");
+					mvprintw(10, 34, "%s", " ");
 					cnt3++;
 				}
 				break;
@@ -426,301 +486,301 @@ int main(int argc, char* argv[])
 
 			case 5:
 				if (key == 't') {
-					mvwaddstr(win, 10, 37, " ");
+					mvprintw(10, 37, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 6:
 				if (key == 'h') {
-					mvwaddstr(win, 10, 39, " ");
+					mvprintw(10, 39, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 7:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 41, " ");
+					mvprintw(10, 41, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 8:
 				if (key == 'g') {
-					mvwaddstr(win, 10, 44, " ");
+					mvprintw(10, 44, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 9:
 				if (key == 'u') {
-					mvwaddstr(win, 10, 46, " ");
+					mvprintw(10, 46, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 10:
 				if (key == 'i') {
-					mvwaddstr(win, 10, 48, " ");
+					mvprintw(10, 48, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 11:
 				if (key == 't') {
-					mvwaddstr(win, 10, 50, " ");
+					mvprintw(10, 50, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 12:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 52, " ");
+					mvprintw(10, 52, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 13:
 				if (key == 'r') {
-					mvwaddstr(win, 10, 54, " ");
-					mvwaddstr(win, 10, 25, "H e  m a k e s  b r e a k f a s t");
+					mvprintw(10, 54, "%s", " ");
+					mvprintw(10, 25, "%s", Level3.Q2);
 					cnt3++;
 				}
 				break;
 
 			case 14:
 				if (key == 'H') {
-					mvwaddstr(win, 10, 25, " ");
+					mvprintw(10, 25, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 15:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 27, " ");
+					mvprintw(10, 27, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 16:
 				if (key == 'm') {
-					mvwaddstr(win, 10, 30, " ");
+					mvprintw(10, 30, "%s", " ");
 					cnt3++;
 				}
 				break;
 			case 17:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 32, " ");
+					mvprintw(10, 32, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 18:
 				if (key == 'k') {
-					mvwaddstr(win, 10, 34, " ");
+					mvprintw(10, 34, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 19:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 36, " ");
+					mvprintw(10, 36, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 20:
 				if (key == 's') {
-					mvwaddstr(win, 10, 38, " ");
+					mvprintw(10, 38, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 21:
 				if (key == 'b') {
-					mvwaddstr(win, 10, 41, " ");
+					mvprintw(10, 41, "%s", " ");
 					cnt3++;
 				}
 
 			case 22:
 				if (key == 'r') {
-					mvwaddstr(win, 10, 43, " ");
+					mvprintw(10, 43, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 23:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 45, " ");
+					mvprintw(10, 45, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 24:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 47, " ");
+					mvprintw(10, 47, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 25:
 				if (key == 'k') {
-					mvwaddstr(win, 10, 49, " ");
+					mvprintw(10, 49, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 26:
 				if (key == 'f') {
-					mvwaddstr(win, 10, 51, " ");
+					mvprintw(10, 51, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 27:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 53, " ");
+					mvprintw(10, 53, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 28:
 				if (key == 's') {
-					mvwaddstr(win, 10, 55, " ");
+					mvprintw(10, 55, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 29:
 				if (key == 't') {
-					mvwaddstr(win, 10, 57, " ");
-					mvwaddstr(win, 10, 25, "S h e  h a s  t o  d o  h o m e w o r k");
+					mvprintw(10, 57, "%s", " ");
+					mvprintw(10, 25, "%s", Level3.Q3);
 					cnt3++;
 				}
 				break;
 
 			case 30:
 				if (key == 'S') {
-					mvwaddstr(win, 10, 25, " ");
+					mvprintw(10, 25, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 31:
 				if (key == 'h') {
-					mvwaddstr(win, 10, 27, " ");
+					mvprintw(10, 27, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 32:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 29, " ");
+					mvprintw(10, 29, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 33:
 				if (key == 'h') {
-					mvwaddstr(win, 10, 32, " ");
+					mvprintw(10, 32, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 34:
 				if (key == 'a') {
-					mvwaddstr(win, 10, 34, " ");
+					mvprintw(10, 34, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 35:
 				if (key == 's') {
-					mvwaddstr(win, 10, 36, " ");
+					mvprintw(10, 36, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 36:
 				if (key == 't') {
-					mvwaddstr(win, 10, 39, " ");
+					mvprintw(10, 39, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 37:
 				if (key == 'o') {
-					mvwaddstr(win, 10, 41, " ");
+					mvprintw(10, 41, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 38:
 				if (key == 'd') {
-					mvwaddstr(win, 10, 44, " ");
+					mvprintw(10, 44, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 39:
 				if (key == 'o') {
-					mvwaddstr(win, 10, 46, " ");
+					mvprintw(10, 46, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 40:
 				if (key == 'h') {
-					mvwaddstr(win, 10, 49, " ");
+					mvprintw(10, 49, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 41:
 				if (key == 'o') {
-					mvwaddstr(win, 10, 51, " ");
+					mvprintw(10, 51, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 42:
 				if (key == 'm') {
-					mvwaddstr(win, 10, 53, " ");
+					mvprintw(10, 53, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 43:
 				if (key == 'e') {
-					mvwaddstr(win, 10, 55, " ");
+					mvprintw(10, 55, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 44:
 				if (key == 'w') {
-					mvwaddstr(win, 10, 57, " ");
+					mvprintw(10, 57, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 45:
 				if (key == 'o') {
-					mvwaddstr(win, 10, 59, " ");
+					mvprintw(10, 59, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 46:
 				if (key == 'r') {
-					mvwaddstr(win, 10, 61, " ");
+					mvprintw(10, 61, "%s", " ");
 					cnt3++;
 				}
 				break;
 
 			case 47:
 				if (key == 'k') {
-					mvwaddstr(win, 10, 63, " ");
+					mvprintw(10, 63, "%s", " ");
 					mvwaddstr(win, 10, 25, "G A M E  C L E A R ! !");
 					cnt3++;
 				}
