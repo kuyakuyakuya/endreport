@@ -1,28 +1,10 @@
-﻿#include <stdio.h>
-#include <curses.h>
-#include <Windows.h>
-#define CHARBUFF 124
-#define BUFFSIZE 1024
-
-
-void getCurrentDirectory(char* currentDirectory) {
-	GetCurrentDirectory(CHARBUFF, currentDirectory);
-}
-
-
-int cnt = 0;
-int cnt2 = 0;
-int cnt3 = 0;
+﻿#include "setting.h"
 
 int main(int argc, char* argv[])
 {
-
-	struct Question {
-		char Q1[CHARBUFF];
-		char Q2[CHARBUFF];
-		char Q3[CHARBUFF];
-
-	};
+	int cnt = 0;
+	int cnt2 = 0;
+	int cnt3 = 0;
 
 	Question Level1;
 	Question Level2;
@@ -67,6 +49,7 @@ int main(int argc, char* argv[])
 	GetPrivateProfileString(section, keyWord, "none", keyValue, CHARBUFF, settingFile);
 	sprintf_s(Level3.Q3, keyValue);
 
+	
 	if (initscr() == NULL) {
 		return 1;
 	}
