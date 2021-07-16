@@ -4,9 +4,11 @@
 #include <Windows.h>
 #define CHARBUFF 124
 #define BUFFSIZE 1024
+
+
 extern int cnt;
 extern int cnt2;
-extern int cnt3;
+extern int missCnt;
 
 void getCurrentDirectory(char* currentDirectory);
 
