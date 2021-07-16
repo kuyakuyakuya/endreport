@@ -11,6 +11,7 @@ extern int cnt2;
 extern int missCnt;
 
 void getCurrentDirectory(char* currentDirectory);
+void printRule();
 
 struct Question {
 	char Q1[CHARBUFF];

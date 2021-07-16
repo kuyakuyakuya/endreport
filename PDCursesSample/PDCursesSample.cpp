@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
 				mvwaddstr(win, 14, 28, "LEVEL1 : Press the KEY '1'");
 				mvwaddstr(win, 16, 28, "LEVEL2 : Press the KEY '2'");
 				mvwaddstr(win, 18, 28, "LEVEL3 : Press the KEY '3'");
-
+				printRule();
 				wrefresh(win);
 				cnt++;
 				break;
